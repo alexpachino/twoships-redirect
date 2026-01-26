@@ -24,22 +24,27 @@
             font-size: 2.5em;
             margin-bottom: 20px;
         }
-        p {
+        button {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
             font-size: 1.2em;
-            margin-bottom: 30px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Two Ships</h1>
-        <p>Opening the app...</p>
-        <p style="font-size: 0.9em;">If the app doesn't open, you may need to download Two Ships first.</p>
+        <p>Tap the button below to open the app</p>
+        <button onclick="openApp()">Open Two Ships</button>
     </div>
     <script>
-        const pathParts = window.location.pathname.split('/');
-        const shareId = pathParts[pathParts.length - 1];
-        if (shareId && shareId !== 'ts') {
+        function openApp() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const shareId = urlParams.get('id');
             window.location.href = 'twoships://compare?id=' + shareId;
         }
     </script>
