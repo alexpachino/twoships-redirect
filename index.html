@@ -32,21 +32,36 @@
             border-radius: 10px;
             font-size: 1.2em;
             cursor: pointer;
+            margin-top: 15px;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Two Ships</h1>
-        <p>Tap the button below to open the app</p>
-        <button onclick="openApp()">Open Two Ships</button>
+        <p id="message">Opening app...</p>
+        <button id="retryButton" class="hidden" onclick="openApp()">Tap to Open Two Ships</button>
     </div>
     <script>
         function openApp() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const shareId = urlParams.get('id');
-            window.location.href = 'twoships://compare?id=' + shareId;
+            const shareId = window.location.search.substring(4); // Gets everything after "?id="
+            const appUrl = 'twoships://compare?id=' + shareId;
+            
+            // Try to open the app
+            window.location.href = appUrl;
+            
+            // After a short delay, show the manual button in case auto-open didn't work
+            setTimeout(() => {
+                document.getElementById('message').textContent = 'If the app didn\'t open automatically:';
+                document.getElementById('retryButton').classList.remove('hidden');
+            }, 1500);
         }
+        
+        // Attempt to open automatically on page load
+        openApp();
     </script>
 </body>
 </html>
