@@ -1,75 +1,247 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Two Ships</title>
+
+    <!-- Open Graph / iMessage preview -->
+    <meta property="og:title" content="Two Ships">
+    <meta property="og:description" content="Someone wants to find out if you've ever been in the same place at the same time.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://alexpachino.github.io/twoships-redirect/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            margin: 0;
-            background: #f5f5f5;
-            color: #333;
-            text-align: center;
-            padding: 20px;
+            min-height: -webkit-fill-available;
+            background: #f8f8fa;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #000000;
-                color: #FFFFFF;
+
+        /* Subtle animated gradient background — matches app welcome screen */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 60%);
+            animation: bgShift 8s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes bgShift {
+            0% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px 32px;
+            max-width: 380px;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 48px;
+            opacity: 0;
+            transform: translateY(8px);
+            animation: fadeUp 0.6s ease-out 0.1s forwards;
+        }
+
+        .message {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            line-height: 1.35;
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(8px);
+            animation: fadeUp 0.6s ease-out 0.25s forwards;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #6b7280;
+            line-height: 1.5;
+            margin-bottom: 48px;
+            opacity: 0;
+            transform: translateY(8px);
+            animation: fadeUp 0.6s ease-out 0.4s forwards;
+        }
+
+        .open-btn {
+            display: inline-block;
+            padding: 16px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.25);
+            opacity: 0;
+            transform: translateY(8px);
+            animation: fadeUp 0.6s ease-out 0.55s forwards;
+            -webkit-tap-highlight-color: transparent;
+            font-family: inherit;
+        }
+
+        .open-btn:active {
+            transform: scale(0.97) !important;
+        }
+
+        @media (hover: hover) {
+            .open-btn:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 6px 28px rgba(99, 102, 241, 0.35);
             }
         }
-        
-        .container {
-            max-width: 400px;
+
+        .footer {
+            margin-top: 64px;
+            font-size: 13px;
+            color: #9ca3af;
+            opacity: 0;
+            animation: fadeUp 0.6s ease-out 0.7s forwards;
         }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        button {
-            background: #007AFF;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 1.2em;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-        .hidden {
+
+        .spinner {
             display: none;
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto;
+        }
+
+        .spinner.active {
+            display: block;
+        }
+
+        .btn-text.hidden {
+            display: none;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #0a0a0a;
+            }
+
+            body::before {
+                background: 
+                    radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+                    radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.12) 0%, transparent 60%);
+            }
+
+            .message {
+                color: #f0f0f0;
+            }
+
+            .subtitle {
+                color: #8b8b8e;
+            }
+
+            .footer {
+                color: #4b4b4e;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Two Ships</h1>
-        <p id="message">Opening app...</p>
-        <button id="retryButton" class="hidden" onclick="openApp()">Tap to Open Two Ships</button>
+        <div class="logo">Two Ships</div>
+
+        <div class="message">Someone wants to discover your shared moments</div>
+
+        <div class="subtitle">Open in Two Ships to see if you've ever been in the same place at the same time.</div>
+
+        <button class="open-btn" id="openBtn" onclick="openApp()">
+            <span class="btn-text" id="btnText">Open in Two Ships</span>
+            <div class="spinner" id="spinner"></div>
+        </button>
+
+        <div class="footer">&copy; Two Ships 2026</div>
     </div>
+
     <script>
+        // Extract share ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const shareId = params.get('id');
+
         function openApp() {
-            const shareId = window.location.search.substring(4); // Gets everything after "?id="
-            const appUrl = 'twoships://compare?id=' + shareId;
-            
-            // Try to open the app
-            window.location.href = appUrl;
-            
-            // After a short delay, show the manual button in case auto-open didn't work
-            setTimeout(() => {
-                document.getElementById('message').textContent = 'If the app didn\'t open automatically:';
-                document.getElementById('retryButton').classList.remove('hidden');
+            if (!shareId) return;
+
+            const btn = document.getElementById('openBtn');
+            const btnText = document.getElementById('btnText');
+            const spinner = document.getElementById('spinner');
+
+            // Show loading state
+            btnText.classList.add('hidden');
+            spinner.classList.add('active');
+
+            // Try deep link
+            const deepLink = 'twoships://?id=' + shareId;
+            window.location.href = deepLink;
+
+            // If still here after 1.5s, app probably isn't installed
+            setTimeout(function() {
+                btnText.textContent = 'Open in Two Ships';
+                btnText.classList.remove('hidden');
+                spinner.classList.remove('active');
             }, 1500);
         }
-        
-        // Attempt to open automatically on page load
-        openApp();
+
+        // Auto-attempt deep link on load (mobile only)
+        if (/iPhone|iPad|iPod/i.test(navigator.userAgent) && shareId) {
+            setTimeout(function() {
+                window.location.href = 'twoships://?id=' + shareId;
+            }, 800);
+        }
     </script>
 </body>
 </html>
