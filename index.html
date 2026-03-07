@@ -73,32 +73,32 @@
     color: var(--black);
     margin-bottom: 48px;
   }
-  .ships { display: flex; align-items: center; gap: 3px; margin-right: 7px; }
-  .ship { width: 11px; height: 28px; background: var(--black); border-radius: 6px; }
-  .ship-up { transform: translateY(-5px); }
-  .ship-down { transform: translateY(5px); }
-  .wordmark-text { font-size: 34px; font-weight: 800; letter-spacing: -1.2px; }
+  .ships { display: flex; align-items: center; gap: 3px; margin-right: 8px; }
+  .ship { width: 13px; height: 32px; background: var(--black); border-radius: 7px; }
+  .ship-up { transform: translateY(-6px); }
+  .ship-down { transform: translateY(6px); }
+  .wordmark-text { font-size: 42px; font-weight: 800; letter-spacing: -1.5px; }
 
   /* Avatar */
   .avatar {
-    width: 64px;
-    height: 64px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: rgba(0, 122, 255, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .avatar span {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: 700;
     color: #fff;
   }
 
   /* Invite text */
   .invite-title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     text-align: center;
     letter-spacing: -0.3px;
@@ -107,14 +107,6 @@
 
   .invite-title strong {
     font-weight: 800;
-  }
-
-  .invite-sub {
-    font-size: 16px;
-    color: var(--gray-600);
-    text-align: center;
-    margin-top: 12px;
-    line-height: 1.5;
   }
 
   /* Buttons */
@@ -203,16 +195,13 @@
     <span class="wordmark-text">Two Ships</span>
   </a>
 
-  <!-- Avatar -->
+  <!-- Invite -->
   <div class="avatar">
     <span id="avatar-initials">?</span>
   </div>
-
-  <!-- Invite text -->
   <h1 class="invite-title">
     <strong id="inviter-name">Someone</strong> wants to connect with you!
   </h1>
-  <p class="invite-sub">Discover the moments you've shared before you ever met!</p>
 
   <!-- Buttons -->
   <div class="buttons">
@@ -227,11 +216,11 @@
     <span class="footer-divider">·</span>
     <a href="/terms">Terms of Service</a>
     <span class="footer-divider">·</span>
-    <a href="mailto:alexpachino@me.com">Contact</a>
+    <a href="/cdn-cgi/l/email-protection#d1b0bdb4a9a1b0b2b9b8bfbe91bcb4ffb2bebc">Contact</a>
   </nav>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Parse URL params
   const params = new URLSearchParams(window.location.search);
   const shareId = params.get('id');
@@ -269,13 +258,5 @@
     window.location.href = deepLink;
 
     // If still here after a moment, redirect to App Store
-    setTimeout(function() {
-      if (appStoreLink !== '#') {
-        window.location.href = appStoreLink;
-      }
-    }, 1500);
-  });
-</script>
-
-</body>
-</html>
+    setTimeou
+    
