@@ -3,54 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Two Ships — Discover the moments you've shared before you ever met</title>
-<meta name="description" content="Two Ships analyzes your photo library to discover moments you shared with friends before you ever met. Same concerts, cities, coffee shops — find out where your paths crossed.">
-
-<!-- Open Graph -->
-<meta property="og:title" content="Two Ships">
+<title>Two Ships — You've been invited!</title>
+<meta name="description" content="Someone wants to connect with you on Two Ships. Discover the moments you've shared before you ever met!">
+<meta property="og:title" content="Two Ships — You've been invited!">
 <meta property="og:description" content="Discover the moments you've shared before you ever met!">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://twoships.app">
-<meta property="og:image" content="https://alexpachino.github.io/twoships-redirect/og-main.png">
+<meta property="og:image" content="https://alexpachino.github.io/twoships-redirect/og-invite.png">
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1260">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://alexpachino.github.io/twoships-redirect/og-main.png">
-
+<meta name="twitter:image" content="https://alexpachino.github.io/twoships-redirect/og-invite.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet">
 <style>
   :root {
     --black: #111;
     --white: #fff;
-    --gray-50: #fafafa;
-    --gray-100: #f5f5f5;
     --gray-400: #a1a1a1;
     --gray-500: #737373;
     --gray-600: #525252;
-    --blue: #007AFF;
   }
-
   @media (prefers-color-scheme: dark) {
     :root {
       --black: #f5f5f5;
       --white: #111;
-      --gray-50: #1a1a1a;
-      --gray-100: #1c1c1c;
       --gray-400: #666;
       --gray-500: #999;
       --gray-600: #aaa;
     }
   }
-
-  @media (prefers-color-scheme: dark) {
-    .hero::before { display: none; }
-  }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html {
     font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
     color: var(--black);
@@ -58,134 +42,94 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
   body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 80px 24px 80px;
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
+    padding: 40px 24px 60px;
   }
-
-  /* Subtle background texture */
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 40%, var(--gray-100) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 1;
+  .content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 520px;
+    max-width: 380px;
+    width: 100%;
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out 0.1s forwards;
   }
-
-  /* ── WORDMARK ── */
   .wordmark {
     display: inline-flex;
     align-items: center;
-    gap: 0;
-    opacity: 0;
-    animation: fadeUp 0.8s ease-out 0.1s forwards;
+    text-decoration: none;
+    color: var(--black);
+    margin-bottom: 48px;
   }
-
-  .ships {
+  .ships { display: flex; align-items: center; gap: 3px; margin-right: 8px; }
+  .ship { width: 13px; height: 32px; background: var(--black); border-radius: 7px; }
+  .ship-up { transform: translateY(-6px); }
+  .ship-down { transform: translateY(6px); }
+  .wordmark-text { font-size: 42px; font-weight: 800; letter-spacing: -1.5px; }
+  .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(0, 122, 255, 0.6);
     display: flex;
     align-items: center;
-    gap: 3px;
-    margin-right: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
   }
-
-  .ship {
-    width: 11px;
-    height: 28px;
-    background: var(--black);
-    border-radius: 6px;
-  }
-
-  .ship-up { transform: translateY(-5px); }
-  .ship-down { transform: translateY(5px); }
-
-  .wordmark-text {
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: -1.5px;
-    color: var(--black);
-    line-height: 1;
-  }
-
-  /* ── TAGLINE ── */
-  .tagline {
-    font-size: 22px;
+  .avatar span {
+    font-size: 16px;
     font-weight: 700;
-    line-height: 1.35;
+    color: #fff;
+  }
+  .invite-title {
+    font-size: 20px;
+    font-weight: 700;
     text-align: center;
-    color: var(--black);
-    margin-top: 32px;
     letter-spacing: -0.3px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease-out 0.3s forwards;
+    line-height: 1.3;
   }
-
-  .description {
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 1.6;
-    text-align: center;
-    color: var(--gray-600);
-    margin-top: 20px;
-    max-width: 420px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease-out 0.45s forwards;
-  }
-
-  /* ── CTA ── */
-  .cta-group {
-    margin-top: 40px;
+  .invite-title strong { font-weight: 800; }
+  .buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease-out 0.6s forwards;
+    gap: 12px;
+    width: 100%;
+    margin-top: 36px;
   }
-
-  .app-store-badge {
+  .btn-primary {
     display: inline-block;
+    padding: 16px 40px;
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
     transition: transform 0.15s ease, opacity 0.15s ease;
   }
-
-  .app-store-badge:hover {
-    transform: scale(0.97);
-    opacity: 0.85;
+  .btn-primary:hover { transform: scale(0.98); opacity: 0.85; }
+  .btn-primary:active { transform: scale(0.96); }
+  .btn-secondary {
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--gray-500);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.15s ease;
   }
-
-  .app-store-badge:active {
-    transform: scale(0.95);
-  }
-
-  .app-store-badge img {
-    display: block;
-  }
-
-  /* ── FOOTER ── */
+  .btn-secondary:hover { color: var(--black); }
   footer {
     position: fixed;
     bottom: 0;
@@ -193,93 +137,109 @@
     right: 0;
     padding: 16px 24px;
     text-align: center;
-    background: linear-gradient(to top, var(--white) 60%, transparent);
-    z-index: 10;
   }
-
-  footer nav {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  footer a {
-    font-size: 13px;
-    color: var(--gray-500);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-
-  footer a:hover {
-    color: var(--black);
-  }
-
-  .footer-divider {
-    color: var(--gray-400);
-    font-size: 13px;
-    user-select: none;
-  }
-
-  /* ── ANIMATIONS ── */
+  footer nav { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  footer a { font-size: 13px; color: var(--gray-500); text-decoration: none; }
+  footer a:hover { color: var(--black); }
+  .footer-divider { color: var(--gray-400); font-size: 13px; }
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
-  /* ── RESPONSIVE ── */
   @media (max-width: 480px) {
-    .hero { padding: 60px 20px 40px; }
-    .wordmark-text { font-size: 34px; }
-    .ship { width: 9px; height: 24px; }
-    .ships { gap: 2px; margin-right: 6px; }
-    .tagline { font-size: 19px; margin-top: 28px; }
-    .description { font-size: 16px; }
+    body { padding: 40px 20px 60px; }
   }
 </style>
 </head>
 <body>
 
-<section class="hero">
-  <div class="hero-content">
-
-    <!-- Wordmark -->
-    <div class="wordmark">
-      <div class="ships">
-        <div class="ship ship-up"></div>
-        <div class="ship ship-down"></div>
-      </div>
-      <span class="wordmark-text">Two Ships</span>
+<div class="content">
+  <a href="/" class="wordmark">
+    <div class="ships">
+      <div class="ship ship-up"></div>
+      <div class="ship ship-down"></div>
     </div>
+    <span class="wordmark-text">Two Ships</span>
+  </a>
 
-    <!-- Tagline -->
-    <h1 class="tagline">Discover the moments you've shared before you ever met!</h1>
-
-    <!-- Description -->
-    <p class="description">
-      Find out if you and a friend have ever been in the same place at the same time.
-    </p>
-
-    <!-- CTA -->
-    <div class="cta-group">
-      <a href="#" class="app-store-badge">
-        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" height="54">
-      </a>
-    </div>
-
+  <div class="avatar">
+    <span id="avatar-initials">?</span>
   </div>
-</section>
+  <h1 class="invite-title">
+    <strong id="inviter-name">Someone</strong> wants to connect with you!
+  </h1>
+
+  <div class="buttons">
+    <a href="#" id="open-btn" class="btn-primary">Open in Two Ships</a>
+    <a href="#" id="download-btn" class="btn-secondary">Don't have the app? Download it here</a>
+  </div>
+</div>
 
 <footer>
   <nav>
     <a href="/privacy">Privacy Policy</a>
-    <span class="footer-divider">·</span>
+    <span class="footer-divider">&middot;</span>
     <a href="/terms">Terms of Service</a>
-    <span class="footer-divider">·</span>
-    <a href="/cdn-cgi/l/email-protection#e6878a
+    <span class="footer-divider">&middot;</span>
+    <a id="contact-link" href="#">Contact</a>
+  </nav>
+</footer>
+
+<script>
+  (function() {
+    // Build contact link in JS to avoid Cloudflare email obfuscation
+    var u = 'alexpachino';
+    var d = 'me.com';
+    var contactEl = document.getElementById('contact-link');
+    if (contactEl) contactEl.href = 'mai' + 'lto:' + u + '@' + d;
+
+    // Parse URL params
+    var params = new URLSearchParams(window.location.search);
+    var shareId = params.get('id');
+    var rawName = params.get('name');
+    var displayName = rawName ? decodeURIComponent(rawName) : 'Someone';
+
+    // Update name
+    var nameEl = document.getElementById('inviter-name');
+    if (nameEl) nameEl.textContent = displayName;
+
+    // Update page title
+    document.title = displayName + ' wants to connect \u2014 Two Ships';
+
+    // Initials
+    var parts = displayName.split(' ');
+    var ini = parts.length >= 2
+      ? (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase()
+      : displayName.charAt(0).toUpperCase();
+    var avatarEl = document.getElementById('avatar-initials');
+    if (avatarEl) avatarEl.textContent = ini;
+
+    // Deep link
+    var deepLink = shareId ? 'twoships://invite?id=' + shareId : null;
+    var appStoreLink = null; // Replace with real App Store URL when available
+
+    // Open in Two Ships button
+    var openBtn = document.getElementById('open-btn');
+    if (openBtn) {
+      openBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!deepLink) return;
+        window.location.href = deepLink;
+        if (appStoreLink) {
+          setTimeout(function() {
+            window.location.href = appStoreLink;
+          }, 1500);
+        }
+      });
+    }
+
+    // Download button
+    var dlBtn = document.getElementById('download-btn');
+    if (dlBtn && appStoreLink) {
+      dlBtn.href = appStoreLink;
+    }
+  })();
+</script>
+
+</body>
+</html>
